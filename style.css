@@ -1,0 +1,40 @@
+body, html {
+  height: 100vh;
+  font-family: 'Arial';
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+h1, h3 {
+  font-weight: normal;
+}
+
+input {
+  width: 200px;
+  background-color: white;
+  color: black;
+  font-size: 15px;
+  padding: 10px;
+  font-family: 'Arial', sans-serif;
+  border-radius: 5px;
+  padding-left: 30px;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+}
+
+#logo {
+  margin-top: 30px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 20px;
+}
+
+img {
+  max-width: 600px;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 20px;
+}
