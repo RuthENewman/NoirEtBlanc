@@ -1,42 +1,42 @@
 const input = document.querySelector('input[type="file"]');
+const displayImageDiv = document.querySelector('.displayImage');
 function handleFiles(files) {
-  console.log(input.files)
   const reader = new FileReader(files);
   reader.onload = function(){
 
     const img = new Image();
 
     img.onload = function() {
+      if(displayImageDiv.children.length > 1) {
+        displayImageDiv.removeChild(displayImageDiv.children[0]);
+      }
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
       context.drawImage(img,0,0);
 
-      // images = document.querySelectorAll('img')
-      // image = images[1]
-      // image.style.filter = 'grayscale(1)'
+      images = document.querySelectorAll('img')
+      image = images[1]
+      image.style.filter = 'grayscale(1)'
 
-      // const imageData = context.getImageData(0,0,canvas.width, canvas.height);
-      // const data = imageData.data;
-      // for (let i = 0; i <= data.length; i += 4) {
-      //   const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-      //   data[i] = avg;
-      //   data[i + 1] = avg;
-      //   data[i + 2] = avg;
-      // }
+      const imageData = context.getImageData(0,0,canvas.width, canvas.height);
+      const data = imageData.data;
+      for (let x = 0; x < imageData.width; x++) {
+        for (let y = 0; y < imageData.width; y++) {
+          let i = (y * 4) * imageData.width * x * 4;
+          let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          data[i] = avg;
+          data[i + 1] = avg;
+          data[i + 2] = avg;
+        }
+      }
 
-      // context.putImageData(imageData, 0, 0);
+      context.putImageData(imageData, 0, 0);
 
-      // canvas.toBlob(function(blob) {
-      //   const form = new FormData()
-      //   form.append('image', blob);
-      //   const xhr = new XMLHttpRequest();
-      //   xhr.open('POST', '/imageupload', true)
-      //   xhr.send(form);
-      // })
     }
     img.src = reader.result;
     img.style.filter = 'grayscale(1)';
-    document.body.appendChild(img);
+
+    displayImageDiv.appendChild(img);
   }
   reader.readAsDataURL(input.files[0]);
 }
