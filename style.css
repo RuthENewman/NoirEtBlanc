@@ -32,7 +32,7 @@ input {
 }
 
 img {
-  max-width: 600px;
+  max-width: 500px;
   display: block;
   position: relative;
   margin: 0 auto;
